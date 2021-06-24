@@ -1,12 +1,6 @@
 function run_loop(obj)
     
-    if isempty(obj.save_folder)
-        
-        obj.save_folder=uigetdir('choose save folder');
-
-    end
-    
-    obj.clear_content_folder;
+    res_folder=obj.setup_folder();
     
     param_name=obj.sweep_param;
     
@@ -14,12 +8,13 @@ function run_loop(obj)
 
     param_unit=obj.sweep_unit;
     
-    filename_base=strcat(obj.save_folder,filesep,...
+    fprintf(sprintf("Running %s sweep...\n",param_name));
+    
+    filename_base=strcat(res_folder,filesep,...
         strrep(string(obj.model.name),'.mph',strcat('_',param_name,'_')));
     
     obj.param_table=obj.get_params_table();
-
-    
+  
     for i=1:length(param_set)
 
         itermsg=sprintf('Running Sweep Part %d\n',i);
@@ -39,11 +34,11 @@ function run_loop(obj)
         
     end
 
-        writetable(obj.param_table,strcat(obj.save_folder,filesep,'params.txt'));
+        writetable(obj.param_table,strcat(res_folder,filesep,'params.txt'));
 
         batchdata=obj;
         
-        save(strcat(obj.save_folder,filesep,'data.mat'),'batchdata');
+        save(strcat(res_folder,filesep,'data.mat'),'batchdata');
         
         mphsave(obj.model);
 

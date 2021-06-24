@@ -1,4 +1,5 @@
-function x= set_param(obj,param,value,unit)
+function x= set_param(obj,param,value,varargin)
+    
     x=0;
         
     model=obj.model;
@@ -17,6 +18,16 @@ function x= set_param(obj,param,value,unit)
     if ~isstring(value)
         
         value=string(value);
+        
+    end
+    
+    if isempty(varargin)
+        
+        unit='';
+        
+    else
+        
+        unit=varargin{1};
         
     end
     

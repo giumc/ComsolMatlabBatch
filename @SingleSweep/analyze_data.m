@@ -10,7 +10,7 @@ function f=analyze_data(obj)
     
     xlab=strcat(obj.sweep_param,obj.sweep_unit);
     
-    xlimits=[min(obj.sweep_value)-0.1 max(obj.sweep_value)+0.1];
+    xlimits=[min(obj.sweep_value)*(1-0.01) max(obj.sweep_value)*(1+0.01)];
 
     set(groot,'defaultAxesFontSize',14);
     
@@ -21,11 +21,11 @@ function f=analyze_data(obj)
         r=obj.r(i);
 
         kt2(i)=r.mode(1).kt2.value;
-        
-        c0(i)=r.c0.value;
-        
-        fres(i)=r.mode(1).fres.value;
 
+        c0(i)=r.c0.value;
+
+        fres(i)=r.mode(1).fres.value;
+            
     end
 
     aspectratio=[3,1,1];

@@ -4,6 +4,8 @@ classdef SingleSweep<handle
         
         model ;
         
+        tag;
+        
         study ;
         
         sweep_param ;
@@ -22,11 +24,24 @@ classdef SingleSweep<handle
     
     methods
         
-        function obj=SingleSweep(varargin)
+        function obj=SingleSweep()
             
+            obj.init;
 %             ModelUtil.showProgress(true);
             
         end
+        
+        function delete(obj)
+            
+            mphsave(obj.model)
+            
+        end
+        
+    end
+    
+    methods (Access=protected)
+        
+        init(obj);
         
     end
     
@@ -47,6 +62,8 @@ classdef SingleSweep<handle
             obj.study.run();
             
         end
+        
+        f=setup_folder(obj);
         
         [f,y]=get_admittance(obj);
         
