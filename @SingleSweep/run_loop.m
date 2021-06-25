@@ -17,7 +17,7 @@ function run_loop(obj)
   
     for i=1:length(param_set)
 
-        itermsg=sprintf('Running Sweep Part %d\n',i);
+        itermsg=sprintf('Running Sweep Part %d of %d\n',i,length(param_set));
         fprintf(itermsg);
     
         obj.set_param(param_name,param_set(i),param_unit);

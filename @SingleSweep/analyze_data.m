@@ -70,5 +70,27 @@ function f=analyze_data(obj)
     ax3.PlotBoxAspectRatio=aspectratio;
 
     ylim([min(fres/1e6) max(fres/1e6)]);
+    
+    ax1.Position(1)=0.05;
+    ax2.Position(1)=0.05;
+    ax3.Position(1)=0.05;
+    ut=uitable(gcf);
+    
+    t=obj.param_table;
+    
+    pars=convertStringsToChars(t.Var1);    
+    vals=convertStringsToChars(t.Var2);
+    
+    f.Units='normalized';
+    
+    f.Position=[0.5005,0.038,0.499,0.8833];
+    
+    ut.Units='normalized';
+    
+    ut.Data={pars{:}; vals{:}}.'
+    
+    ut.Position([1,2])=[0.8,0.4];
 
+    ut.Position([3,4])=ut.Extent([3,4]);
+    
 end
